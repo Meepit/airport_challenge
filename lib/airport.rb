@@ -19,7 +19,7 @@ class Airport
 
   def receive(plane)
     raise "Unsuitable conditions for landing" if weather.stormy?
-    raise "Airport full, unable to receive plane" if planes.length >= max_capacity
+    raise "Airport full, unable to receive plane" if full?
     plane.land(self)
     add_plane(plane)
   end
@@ -31,6 +31,10 @@ class Airport
   private
   def add_plane(plane)
     planes << plane
+  end
+
+  def full?
+    planes.length >= max_capacity
   end
 
   def remove_plane(plane)
